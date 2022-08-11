@@ -1,10 +1,10 @@
-script_name('ROZOVHELPER') -- название скрипта
-script_author('HAYDEN') -- автор скрипта
-script_description('ADMIN TUCSON') -- описание скрипта
+script_name('ROZOVHELPER') -- РЅР°Р·РІР°РЅРёРµ СЃРєСЂРёРїС‚Р°
+script_author('HAYDEN') -- Р°РІС‚РѕСЂ СЃРєСЂРёРїС‚Р°
+script_description('ADMIN TUCSON') -- РѕРїРёСЃР°РЅРёРµ СЃРєСЂРёРїС‚Р°
 thisScript("ADMIN HELPER")
 script_version("1.2")
 
-require "lib.moonloader" -- подключение библиотеки
+require "lib.moonloader" -- РїРѕРґРєР»СЋС‡РµРЅРёРµ Р±РёР±Р»РёРѕС‚РµРєРё
 local keys = require "vkeys"
 
 local main_color = 0x5A90CE
@@ -28,10 +28,10 @@ update_state = false
 local script_vers = 3
 local script_vers_text = "3.00"
 
-local update_url = "https://raw.githubusercontent.com/LucasRozov/scriptss/main/update.ini" -- тут тоже свою ссылку
-local update_path = getWorkingDirectory() .. "/update.ini" -- и тут свою ссылку
+local update_url = "https://raw.githubusercontent.com/LucasRozov/scriptss/main/update.ini" -- С‚СѓС‚ С‚РѕР¶Рµ СЃРІРѕСЋ СЃСЃС‹Р»РєСѓ
+local update_path = getWorkingDirectory() .. "/update.ini" -- Рё С‚СѓС‚ СЃРІРѕСЋ СЃСЃС‹Р»РєСѓ
 
-local script_url = "https://github.com/LucasRozov/scriptss/blob/main/Admin%20Helper.luac?raw=true" -- тут свою ссылку
+local script_url = "https://github.com/LucasRozov/scriptss/blob/main/Admin%20Helper.lua?raw=true" -- С‚СѓС‚ СЃРІРѕСЋ СЃСЃС‹Р»РєСѓ
 local script_path = thisScript().path
 
 local main_window_state = imgui.ImBool(false)
@@ -44,9 +44,9 @@ nick = sampGetPlayerNickname(playerid)
 function main()
 	if not isSampLoaded() or not isSampfuncsLoaded() then return end
     while not isSampAvailable() do wait(100) end
- sampAddChatMessage('{7FFF00}[RozovHelper]{ffffff} Скрипт успешно загружен.', -1)
- sampAddChatMessage('{7FFF00}[RozovHelper]{ffffff} Регламент был обновлен 11.08.2022.', -1)
- sampAddChatMessage(string.format('{7FFF00}[RozovHelper]{ffffff} Версия: '..script_vers_text ),-1)
+ sampAddChatMessage('{7FFF00}[RozovHelper]{ffffff} РЎРєСЂРёРїС‚ СѓСЃРїРµС€РЅРѕ Р·Р°РіСЂСѓР¶РµРЅ.', -1)
+ sampAddChatMessage('{7FFF00}[RozovHelper]{ffffff} Р РµРіР»Р°РјРµРЅС‚ Р±С‹Р» РѕР±РЅРѕРІР»РµРЅ 11.08.2022.', -1)
+ sampAddChatMessage(string.format('{7FFF00}[RozovHelper]{ffffff} Р’РµСЂСЃРёСЏ: '..script_vers_text ),-1)
 
 
 sampRegisterChatCommand("zz", cmd_zz)
@@ -83,7 +83,7 @@ downloadUrlToFile(update_url, update_path, function(id, status)
 	if status == dlstatus.STATUS_ENDDOWNLOADDATA then
 		updateIni = inicfg.load(nil, update_path)
 		if tonumber(updateIni.info.vers) > script_vers then
-			sampAddChatMessage("{7FFF00}[RozovHelper]{ffffff} Есть обновление! Версия: " .. updateIni.info.vers_text, -1)
+			sampAddChatMessage("{7FFF00}[RozovHelper]{ffffff} Р•СЃС‚СЊ РѕР±РЅРѕРІР»РµРЅРёРµ! Р’РµСЂСЃРёСЏ: " .. updateIni.info.vers_text, -1)
 			update_state = true
 		end
 		os.remove(update_path)
@@ -101,7 +101,7 @@ end
 if update_state then
 	downloadUrlToFile(script_url, script_path, function(id, status)
 		if status == dlstatus.STATUS_ENDDOWNLOADDATA then
-			sampAddChatMessage("Скрипт успешно обновлен!", -1)
+			sampAddChatMessage("РЎРєСЂРёРїС‚ СѓСЃРїРµС€РЅРѕ РѕР±РЅРѕРІР»РµРЅ!", -1)
 			thisScript():reload()
 		end
 	end)
@@ -116,13 +116,13 @@ function imgui.OnDrawFrame()
 	imgui.SetNextWindowPos(imgui.ImVec2(sw / 2, sh / 2), imgui.Cond.FirstUseEver, imgui.ImVec2(0.5, 0.5))
     imgui.SetNextWindowSize(imgui.ImVec2(600, 400), imgui.Cond.FirstUseEver)
 	imgui.Begin(u8'Admin Helper', main_window_state)
-		if imgui.CollapsingHeader(u8'Команды скрипта') then
-			imgui.Text(u8'/cheat [ID] - Выдать BAN за Читы\n/zz [ID] - Выдать WARN игроку за DeathMatch в ЗЗ\n/sbiv [ID] - Выдать JAIL[120] за сбив анимации\n/ght [ID] - Соркащение /gethere\n/ghc [IDcar] - Сокращение /getherecar [IDcar]\n/spl [ID] - Сокращение /spplayer\n/caps [ID] - Выдать MUTE за CapsLock\n/mg [ID] - Выдать MUTE за MetaGaming\n/torg [ID] - Выдать MUTE за Торговлю в /j\n/desc [ID] - Удалить ОПИСАНИЕ персонажа игрока на 2 часа\n/oskrod [ID] - Выдать BAN за Оскорбление родных\n/upom [ID] - Выдать BAN[5days] за Упоминание родных\n/afk [ID] - КИКНУТЬ игрока за AFK w/o ESC\n/deagle [radius] [ammo] - Выдать DEAGLE\n/m4 [radius] [ammo] - Выдать M4\n/dildo - Выдать DILDO\n/mp - Выдать PACK оружий "Мероприятие"\n    \n/lvpd - Телепорт в интерьер LVPD (18)\n/lvpd [ID] - Телепорт в интерьер LVPD (18)\n/az - Телепорт в админ зону\n/az [ID] - Телепорт в админ зону с игроком')
+		if imgui.CollapsingHeader(u8'РљРѕРјР°РЅРґС‹ СЃРєСЂРёРїС‚Р°') then
+			imgui.Text(u8'/cheat [ID] - Р’С‹РґР°С‚СЊ BAN Р·Р° Р§РёС‚С‹\n/zz [ID] - Р’С‹РґР°С‚СЊ WARN РёРіСЂРѕРєСѓ Р·Р° DeathMatch РІ Р—Р—\n/sbiv [ID] - Р’С‹РґР°С‚СЊ JAIL[120] Р·Р° СЃР±РёРІ Р°РЅРёРјР°С†РёРё\n/ght [ID] - РЎРѕСЂРєР°С‰РµРЅРёРµ /gethere\n/ghc [IDcar] - РЎРѕРєСЂР°С‰РµРЅРёРµ /getherecar [IDcar]\n/spl [ID] - РЎРѕРєСЂР°С‰РµРЅРёРµ /spplayer\n/caps [ID] - Р’С‹РґР°С‚СЊ MUTE Р·Р° CapsLock\n/mg [ID] - Р’С‹РґР°С‚СЊ MUTE Р·Р° MetaGaming\n/torg [ID] - Р’С‹РґР°С‚СЊ MUTE Р·Р° РўРѕСЂРіРѕРІР»СЋ РІ /j\n/desc [ID] - РЈРґР°Р»РёС‚СЊ РћРџРРЎРђРќРР• РїРµСЂСЃРѕРЅР°Р¶Р° РёРіСЂРѕРєР° РЅР° 2 С‡Р°СЃР°\n/oskrod [ID] - Р’С‹РґР°С‚СЊ BAN Р·Р° РћСЃРєРѕСЂР±Р»РµРЅРёРµ СЂРѕРґРЅС‹С…\n/upom [ID] - Р’С‹РґР°С‚СЊ BAN[5days] Р·Р° РЈРїРѕРјРёРЅР°РЅРёРµ СЂРѕРґРЅС‹С…\n/afk [ID] - РљРРљРќРЈРўР¬ РёРіСЂРѕРєР° Р·Р° AFK w/o ESC\n/deagle [radius] [ammo] - Р’С‹РґР°С‚СЊ DEAGLE\n/m4 [radius] [ammo] - Р’С‹РґР°С‚СЊ M4\n/dildo - Р’С‹РґР°С‚СЊ DILDO\n/mp - Р’С‹РґР°С‚СЊ PACK РѕСЂСѓР¶РёР№ "РњРµСЂРѕРїСЂРёСЏС‚РёРµ"\n    \n/lvpd - РўРµР»РµРїРѕСЂС‚ РІ РёРЅС‚РµСЂСЊРµСЂ LVPD (18)\n/lvpd [ID] - РўРµР»РµРїРѕСЂС‚ РІ РёРЅС‚РµСЂСЊРµСЂ LVPD (18)\n/az - РўРµР»РµРїРѕСЂС‚ РІ Р°РґРјРёРЅ Р·РѕРЅСѓ\n/az [ID] - РўРµР»РµРїРѕСЂС‚ РІ Р°РґРјРёРЅ Р·РѕРЅСѓ СЃ РёРіСЂРѕРєРѕРј')
 		  end
-		  if imgui.CollapsingHeader(u8'Правила') then
+		  if imgui.CollapsingHeader(u8'РџСЂР°РІРёР»Р°') then
 				imgui.Text(u8'soon228')
 		  end
-		  if imgui.CollapsingHeader(u8'Стили') then
+		  if imgui.CollapsingHeader(u8'РЎС‚РёР»Рё') then
 			imgui.BeginChild("ChildWindow2", imgui.ImVec2(200, 175), true)
             for i, value in ipairs(themes.colorThemes) do
                 if imgui.RadioButton(value, checked_radio, i) then
@@ -144,23 +144,23 @@ function se.onServerMessage(color, text)
 		return false
 	end
 
-	if 	text:find('В нашем магазине ты можешь приобрести нужное количество игровых денег и потратить', 1, true) or 
-		text:find('их на желаемый тобой {FFFFFF}бизнес, дом, аксессуар{6495ED} или на покупку каких-нибудь безделушек.', 1, true) or 
-		text:find('Игроки со статусом {FFFFFF}VIP{6495ED} имеют большие возможности, подробнее /help [Преимущества VIP]', 1, true) or
-		text:find('можно приобрести редкие {FFFFFF}автомобили, аксессуары, воздушные шары', 1, true) or
-		text:find('предметы, которые выделят тебя из толпы! Наш сайт: {FFFFFF}arizona-rp.com', 1, true) then
+	if 	text:find('Р’ РЅР°С€РµРј РјР°РіР°Р·РёРЅРµ С‚С‹ РјРѕР¶РµС€СЊ РїСЂРёРѕР±СЂРµСЃС‚Рё РЅСѓР¶РЅРѕРµ РєРѕР»РёС‡РµСЃС‚РІРѕ РёРіСЂРѕРІС‹С… РґРµРЅРµРі Рё РїРѕС‚СЂР°С‚РёС‚СЊ', 1, true) or 
+		text:find('РёС… РЅР° Р¶РµР»Р°РµРјС‹Р№ С‚РѕР±РѕР№ {FFFFFF}Р±РёР·РЅРµСЃ, РґРѕРј, Р°РєСЃРµСЃСЃСѓР°СЂ{6495ED} РёР»Рё РЅР° РїРѕРєСѓРїРєСѓ РєР°РєРёС…-РЅРёР±СѓРґСЊ Р±РµР·РґРµР»СѓС€РµРє.', 1, true) or 
+		text:find('РРіСЂРѕРєРё СЃРѕ СЃС‚Р°С‚СѓСЃРѕРј {FFFFFF}VIP{6495ED} РёРјРµСЋС‚ Р±РѕР»СЊС€РёРµ РІРѕР·РјРѕР¶РЅРѕСЃС‚Рё, РїРѕРґСЂРѕР±РЅРµРµ /help [РџСЂРµРёРјСѓС‰РµСЃС‚РІР° VIP]', 1, true) or
+		text:find('РјРѕР¶РЅРѕ РїСЂРёРѕР±СЂРµСЃС‚Рё СЂРµРґРєРёРµ {FFFFFF}Р°РІС‚РѕРјРѕР±РёР»Рё, Р°РєСЃРµСЃСЃСѓР°СЂС‹, РІРѕР·РґСѓС€РЅС‹Рµ С€Р°СЂС‹', 1, true) or
+		text:find('РїСЂРµРґРјРµС‚С‹, РєРѕС‚РѕСЂС‹Рµ РІС‹РґРµР»СЏС‚ С‚РµР±СЏ РёР· С‚РѕР»РїС‹! РќР°С€ СЃР°Р№С‚: {FFFFFF}arizona-rp.com', 1, true) then
 		return false
 	end
 
 	if
-		text:find('Вы были телепортированы в интерьер №18 (Las Venturas Police Department)', 1, true) then
+		text:find('Р’С‹ Р±С‹Р»Рё С‚РµР»РµРїРѕСЂС‚РёСЂРѕРІР°РЅС‹ РІ РёРЅС‚РµСЂСЊРµСЂ в„–18 (Las Venturas Police Department)', 1, true) then
 		return false
 	end
 
-	-- Вы телепортировали игрока %d в админ-зону №2 (Arizona Interior №2)
+	-- Р’С‹ С‚РµР»РµРїРѕСЂС‚РёСЂРѕРІР°Р»Рё РёРіСЂРѕРєР° %d РІ Р°РґРјРёРЅ-Р·РѕРЅСѓ в„–2 (Arizona Interior в„–2)
 
 	if
-		text:find(' Вы были телепортированы в админ-зону №2 (Arizona Interior №2)', 1, true) then
+		text:find(' Р’С‹ Р±С‹Р»Рё С‚РµР»РµРїРѕСЂС‚РёСЂРѕРІР°РЅС‹ РІ Р°РґРјРёРЅ-Р·РѕРЅСѓ в„–2 (Arizona Interior в„–2)', 1, true) then
 		return false
 	end
 end
@@ -169,10 +169,10 @@ sampRegisterChatCommand("cheat", function(arg)
     local id = string.match(arg, "(.+)")
 	nick = sampGetPlayerNickname(arg)
 	if id == nil then
-		sampAddCshatMessage('{7FFF00}[RozovHelper]{ffffff} Введите ID!', -1)
+		sampAddCshatMessage('{7FFF00}[RozovHelper]{ffffff} Р’РІРµРґРёС‚Рµ ID!', -1)
 	else
-		sampSendChat(string.format("/ban %d 30 Читы", id))
-		sampAddChatMessage(string.format('{7FFF00}[RozovHelper]{ffffff} Вы успешно забанили %s[%d] на 30 дней. Причина:: Чит', nick, id),-1)
+		sampSendChat(string.format("/ban %d 30 Р§РёС‚С‹", id))
+		sampAddChatMessage(string.format('{7FFF00}[RozovHelper]{ffffff} Р’С‹ СѓСЃРїРµС€РЅРѕ Р·Р°Р±Р°РЅРёР»Рё %s[%d] РЅР° 30 РґРЅРµР№. РџСЂРёС‡РёРЅР°:: Р§РёС‚', nick, id),-1)
 	end
 end)
 
@@ -180,10 +180,10 @@ sampRegisterChatCommand("zz", function(arg)
     local id = string.match(arg, "(.+)")
 	nick = sampGetPlayerNickname(arg)
 	if id == nil then
-		sampAddChatMessage('{7FFF00}[RozovHelper]{ffffff} Введите ID!', -1)
+		sampAddChatMessage('{7FFF00}[RozovHelper]{ffffff} Р’РІРµРґРёС‚Рµ ID!', -1)
 	else
-		sampSendChat(string.format("/warn %d DeathMatch в ЗЗ", id))
-		sampAddChatMessage(string.format('{7FFF00}[RozovHelper]{ffffff} Вы успешно заварнили %s[%d]. Причина: DeathMatch в ЗЗ', nick, id),-1)
+		sampSendChat(string.format("/warn %d DeathMatch РІ Р—Р—", id))
+		sampAddChatMessage(string.format('{7FFF00}[RozovHelper]{ffffff} Р’С‹ СѓСЃРїРµС€РЅРѕ Р·Р°РІР°СЂРЅРёР»Рё %s[%d]. РџСЂРёС‡РёРЅР°: DeathMatch РІ Р—Р—', nick, id),-1)
 	end
 end)
 
@@ -191,10 +191,10 @@ sampRegisterChatCommand("sbiv", function(arg)
     local id = string.match(arg, "(.+)")
 	nick = sampGetPlayerNickname(arg)
 	if id == nil then
-		sampAddChatMessage('{7FFF00}[RozovHelper]{ffffff} Введите ID!', -1)
+		sampAddChatMessage('{7FFF00}[RozovHelper]{ffffff} Р’РІРµРґРёС‚Рµ ID!', -1)
 	else
-		sampSendChat(string.format("/jail %d 120 Сбив анимации", id))
-		sampAddChatMessage(string.format('{7FFF00}[RozovHelper]{ffffff} Вы успешно посадили %s[%d] c причиной: DeathMatch в ЗЗ', nick, id),-1)
+		sampSendChat(string.format("/jail %d 120 РЎР±РёРІ Р°РЅРёРјР°С†РёРё", id))
+		sampAddChatMessage(string.format('{7FFF00}[RozovHelper]{ffffff} Р’С‹ СѓСЃРїРµС€РЅРѕ РїРѕСЃР°РґРёР»Рё %s[%d] c РїСЂРёС‡РёРЅРѕР№: DeathMatch РІ Р—Р—', nick, id),-1)
 	end
 end)
 
@@ -202,20 +202,20 @@ sampRegisterChatCommand("ght", function(arg)
     local id = string.match(arg, "(.+)")
 	nick = sampGetPlayerNickname(arg)
 	if id == nil then
-		sampAddChatMessage('{7FFF00}[RozovHelper]{ffffff} Введите ID!', -1)
+		sampAddChatMessage('{7FFF00}[RozovHelper]{ffffff} Р’РІРµРґРёС‚Рµ ID!', -1)
 	else
 		sampSendChat(string.format("/gethere %d", id))
-		sampAddChatMessage(string.format('{7FFF00}[RozovHelper]{ffffff} Вы успешно телепортировали %s[%d] к себе', nick, id),-1)
+		sampAddChatMessage(string.format('{7FFF00}[RozovHelper]{ffffff} Р’С‹ СѓСЃРїРµС€РЅРѕ С‚РµР»РµРїРѕСЂС‚РёСЂРѕРІР°Р»Рё %s[%d] Рє СЃРµР±Рµ', nick, id),-1)
 	end
 end)
 
 sampRegisterChatCommand("ghc", function(arg)
 	nick = sampGetPlayerNickname(arg)
 	if id == nil then
-		sampAddChatMessage('{7FFF00}[RozovHelper]{ffffff} Введите ID!', -1)
+		sampAddChatMessage('{7FFF00}[RozovHelper]{ffffff} Р’РІРµРґРёС‚Рµ ID!', -1)
 	else
 		sampSendChat(string.format("/getherecar %d", id))
-		sampAddChatMessage(string.format('{7FFF00}[RozovHelper]{ffffff} Вы успешно телепортировали машину ID: %d к себе', id),-1)
+		sampAddChatMessage(string.format('{7FFF00}[RozovHelper]{ffffff} Р’С‹ СѓСЃРїРµС€РЅРѕ С‚РµР»РµРїРѕСЂС‚РёСЂРѕРІР°Р»Рё РјР°С€РёРЅСѓ ID: %d Рє СЃРµР±Рµ', id),-1)
 	end
 end)
 
@@ -223,10 +223,10 @@ sampRegisterChatCommand("spl", function(arg)
     local id = string.match(arg, "(.+)")
 	nick = sampGetPlayerNickname(arg)
 	if id == nil then
-		sampAddChatMessage('{7FFF00}[RozovHelper]{ffffff} Введите ID!', -1)
+		sampAddChatMessage('{7FFF00}[RozovHelper]{ffffff} Р’РІРµРґРёС‚Рµ ID!', -1)
 	else
 		sampSendChat(string.format("/spplayer %d", id))
-		sampAddChatMessage(string.format('{7FFF00}[RozovHelper]{ffffff} Вы успешно заспавнили %s[%d]', nick, id),-1)
+		sampAddChatMessage(string.format('{7FFF00}[RozovHelper]{ffffff} Р’С‹ СѓСЃРїРµС€РЅРѕ Р·Р°СЃРїР°РІРЅРёР»Рё %s[%d]', nick, id),-1)
 	end
 end)
 
@@ -234,10 +234,10 @@ sampRegisterChatCommand("spc", function(arg)
     local id = string.match(arg, "(.+)")
 	nick = sampGetPlayerNickname(arg)
 	if id == nil then
-		sampAddChatMessage('{7FFF00}[RozovHelper]{ffffff} Введите ID!', -1)
+		sampAddChatMessage('{7FFF00}[RozovHelper]{ffffff} Р’РІРµРґРёС‚Рµ ID!', -1)
 	else
 		sampSendChat(string.format("/spcar %d", id))
-		sampAddChatMessage(string.format('{7FFF00}[RozovHelper]{ffffff} Вы успешно заспавнили машину ID: %d', id), -1)
+		sampAddChatMessage(string.format('{7FFF00}[RozovHelper]{ffffff} Р’С‹ СѓСЃРїРµС€РЅРѕ Р·Р°СЃРїР°РІРЅРёР»Рё РјР°С€РёРЅСѓ ID: %d', id), -1)
 	end
 end)
 
@@ -245,10 +245,10 @@ sampRegisterChatCommand("caps", function(arg)
     local id = string.match(arg, "(.+)")
 	nick = sampGetPlayerNickname(arg)
 	if id == nil then
-		sampAddChatMessage('{7FFF00}[RozovHelper]{ffffff} Введите ID!', -1)
+		sampAddChatMessage('{7FFF00}[RozovHelper]{ffffff} Р’РІРµРґРёС‚Рµ ID!', -1)
 	else
 		sampSendChat(string.format("/mute %d 30 CapsLock", id))
-		sampAddChatMessage(string.format('{7FFF00}[RozovHelper]{ffffff} Вы успешно замутили %s[%d]. Причина: СapsLock', nick, id), -1)
+		sampAddChatMessage(string.format('{7FFF00}[RozovHelper]{ffffff} Р’С‹ СѓСЃРїРµС€РЅРѕ Р·Р°РјСѓС‚РёР»Рё %s[%d]. РџСЂРёС‡РёРЅР°: РЎapsLock', nick, id), -1)
 	end
 end)
 
@@ -256,10 +256,10 @@ sampRegisterChatCommand("mg", function(arg)
     local id = string.match(arg, "(.+)")
 	nick = sampGetPlayerNickname(arg)
 	if id == nil then
-		sampAddChatMessage('{7FFF00}[RozovHelper]{ffffff} Введите ID!', -1)
+		sampAddChatMessage('{7FFF00}[RozovHelper]{ffffff} Р’РІРµРґРёС‚Рµ ID!', -1)
 	else
 		sampSendChat(string.format("/mute %d 60 MetaGaming", id))
-		sampAddChatMessage(string.format('{7FFF00}[RozovHelper]{ffffff} Вы успешно замутили %s[%d]. Причина: MetaGaming', nick, id),-1)
+		sampAddChatMessage(string.format('{7FFF00}[RozovHelper]{ffffff} Р’С‹ СѓСЃРїРµС€РЅРѕ Р·Р°РјСѓС‚РёР»Рё %s[%d]. РџСЂРёС‡РёРЅР°: MetaGaming', nick, id),-1)
 	end
 end)
 
@@ -267,10 +267,10 @@ sampRegisterChatCommand("desc", function(arg)
     local id = string.match(arg, "(.+)")
 	nick = sampGetPlayerNickname(arg)
 	if id == nil then
-		sampAddChatMessage('{7FFF00}[RozovHelper]{ffffff} Введите ID!', -1)
+		sampAddChatMessage('{7FFF00}[RozovHelper]{ffffff} Р’РІРµРґРёС‚Рµ ID!', -1)
 	else
-		sampSendChat(string.format("/adeldesc %d 2 NonRP описание персонажа", id))
-		sampAddChatMessage(string.format('{7FFF00}[RozovHelper]{ffffff} Вы успешно удалили описание %s[%d]. Причина: NonRP описание персонажа', nick, id),-1)
+		sampSendChat(string.format("/adeldesc %d 2 NonRP РѕРїРёСЃР°РЅРёРµ РїРµСЂСЃРѕРЅР°Р¶Р°", id))
+		sampAddChatMessage(string.format('{7FFF00}[RozovHelper]{ffffff} Р’С‹ СѓСЃРїРµС€РЅРѕ СѓРґР°Р»РёР»Рё РѕРїРёСЃР°РЅРёРµ %s[%d]. РџСЂРёС‡РёРЅР°: NonRP РѕРїРёСЃР°РЅРёРµ РїРµСЂСЃРѕРЅР°Р¶Р°', nick, id),-1)
 	end
 end)
 
@@ -278,10 +278,10 @@ sampRegisterChatCommand("torg", function(arg)
     local id = string.match(arg, "(.+)")
 	nick = sampGetPlayerNickname(arg)
 	if id == nil then
-		sampAddChatMessage('{7FFF00}[RozovHelper]{ffffff} Введите ID!', -1)
+		sampAddChatMessage('{7FFF00}[RozovHelper]{ffffff} Р’РІРµРґРёС‚Рµ ID!', -1)
 	else
-		sampSendChat(string.format("/mute %d 60 Торговля в /j", id))
-		sampAddChatMessage(string.format('{7FFF00}[RozovHelper]{ffffff} Вы успешно замутили %s[%d]. Причина: Торговля в /j', nick, id),-1)
+		sampSendChat(string.format("/mute %d 60 РўРѕСЂРіРѕРІР»СЏ РІ /j", id))
+		sampAddChatMessage(string.format('{7FFF00}[RozovHelper]{ffffff} Р’С‹ СѓСЃРїРµС€РЅРѕ Р·Р°РјСѓС‚РёР»Рё %s[%d]. РџСЂРёС‡РёРЅР°: РўРѕСЂРіРѕРІР»СЏ РІ /j', nick, id),-1)
 	end
 end)
 
@@ -289,10 +289,10 @@ sampRegisterChatCommand("oskrod", function(arg)
     local id = string.match(arg, "(.+)")
 	nick = sampGetPlayerNickname(arg)
 	if id == nil then
-		sampAddChatMessage('{7FFF00}[RozovHelper]{ffffff} Введите ID!', -1)
+		sampAddChatMessage('{7FFF00}[RozovHelper]{ffffff} Р’РІРµРґРёС‚Рµ ID!', -1)
 	else
-		sampSendChat(string.format("/ban %d 30 Оскорбление родных", id))
-		sampAddChatMessage(string.format('{7FFF00}[RozovHelper]{ffffff} Вы успешно забанили %s[%d]. Причина: Оскорбление родных', nick, id),-1)
+		sampSendChat(string.format("/ban %d 30 РћСЃРєРѕСЂР±Р»РµРЅРёРµ СЂРѕРґРЅС‹С…", id))
+		sampAddChatMessage(string.format('{7FFF00}[RozovHelper]{ffffff} Р’С‹ СѓСЃРїРµС€РЅРѕ Р·Р°Р±Р°РЅРёР»Рё %s[%d]. РџСЂРёС‡РёРЅР°: РћСЃРєРѕСЂР±Р»РµРЅРёРµ СЂРѕРґРЅС‹С…', nick, id),-1)
 	end
 end)
 
@@ -300,10 +300,10 @@ sampRegisterChatCommand("afk", function(arg)
     local id = string.match(arg, "(.+)")
 	nick = sampGetPlayerNickname(arg)
 	if id == nil then
-		sampAddChatMessage('{7FFF00}[RozovHelper]{ffffff} Введите ID!', -1)
+		sampAddChatMessage('{7FFF00}[RozovHelper]{ffffff} Р’РІРµРґРёС‚Рµ ID!', -1)
 	else
 		sampSendChat(string.format("/kick %d AFK w/o ESC", id))
-		sampAddChatMessage(string.format('{7FFF00}[RozovHelper]{ffffff} Вы успешно кикнули %s[%d]. Причина: AFK w/o ESC', nick, id),-1)
+		sampAddChatMessage(string.format('{7FFF00}[RozovHelper]{ffffff} Р’С‹ СѓСЃРїРµС€РЅРѕ РєРёРєРЅСѓР»Рё %s[%d]. РџСЂРёС‡РёРЅР°: AFK w/o ESC', nick, id),-1)
 	end
 end)
 
@@ -311,20 +311,20 @@ sampRegisterChatCommand("no_damage", function(arg)
 	nick = sampGetPlayerNickname(arg)
     local id = string.match(arg, "(.+)")
 	if id == nil then
-		sampAddChatMessage('{7FFF00}[RozovHelper]{ffffff} Введите ID!', -1)
+		sampAddChatMessage('{7FFF00}[RozovHelper]{ffffff} Р’РІРµРґРёС‚Рµ ID!', -1)
 	else
-		sampSendChat(string.format("/jail %d 20 ДМ в ЗЗ [Без урона]", id))
-		sampAddChatMessage(string.format('{7FFF00}[RozovHelper]{ffffff} Вы успешно посадили в деморган %s[%d]. Причина: ДМ в ЗЗ [Без урона]', nick, id),-1)
+		sampSendChat(string.format("/jail %d 20 Р”Рњ РІ Р—Р— [Р‘РµР· СѓСЂРѕРЅР°]", id))
+		sampAddChatMessage(string.format('{7FFF00}[RozovHelper]{ffffff} Р’С‹ СѓСЃРїРµС€РЅРѕ РїРѕСЃР°РґРёР»Рё РІ РґРµРјРѕСЂРіР°РЅ %s[%d]. РџСЂРёС‡РёРЅР°: Р”Рњ РІ Р—Р— [Р‘РµР· СѓСЂРѕРЅР°]', nick, id),-1)
 	end
 end)
 
 sampRegisterChatCommand("deagle", function(arg)
     local radius, kolvo = string.match(arg, "(.+) (.+)")
 	if radius == nil then
-		sampAddChatMessage('{7FFF00}[RozovHelper]{ffffff} Введите радиус и количество патронов!', -1)
+		sampAddChatMessage('{7FFF00}[RozovHelper]{ffffff} Р’РІРµРґРёС‚Рµ СЂР°РґРёСѓСЃ Рё РєРѕР»РёС‡РµСЃС‚РІРѕ РїР°С‚СЂРѕРЅРѕРІ!', -1)
 	else
 		sampSendChat(string.format("/gunall %d 24 %d", radius, kolvo))
-		sampAddChatMessage(string.format('{7FFF00}[RozovHelper]{ffffff} Вы успешно выдали Desert Eagle [24] в радиусе %d в количестве %d патронов.', radius, kolvo),-1)
+		sampAddChatMessage(string.format('{7FFF00}[RozovHelper]{ffffff} Р’С‹ СѓСЃРїРµС€РЅРѕ РІС‹РґР°Р»Рё Desert Eagle [24] РІ СЂР°РґРёСѓСЃРµ %d РІ РєРѕР»РёС‡РµСЃС‚РІРµ %d РїР°С‚СЂРѕРЅРѕРІ.', radius, kolvo),-1)
 	end
 end)
 
@@ -332,10 +332,10 @@ sampRegisterChatCommand("upom", function(arg)
 	nick = sampGetPlayerNickname(arg)
     local id = string.match(arg, "(.+)")
 	if id == nil then
-		sampAddChatMessage('{7FFF00}[RozovHelper]{ffffff} Введите ID!', -1)
+		sampAddChatMessage('{7FFF00}[RozovHelper]{ffffff} Р’РІРµРґРёС‚Рµ ID!', -1)
 	else
-		sampSendChat(string.format("/ban %d 5 Упоминание родных", id))
-		sampAddChatMessage(string.format('{7FFF00}[RozovHelper]{ffffff} Вы успешно забанили %s[%d]. Причина: Упоминание родных', nick, id),-1)
+		sampSendChat(string.format("/ban %d 5 РЈРїРѕРјРёРЅР°РЅРёРµ СЂРѕРґРЅС‹С…", id))
+		sampAddChatMessage(string.format('{7FFF00}[RozovHelper]{ffffff} Р’С‹ СѓСЃРїРµС€РЅРѕ Р·Р°Р±Р°РЅРёР»Рё %s[%d]. РџСЂРёС‡РёРЅР°: РЈРїРѕРјРёРЅР°РЅРёРµ СЂРѕРґРЅС‹С…', nick, id),-1)
 	end
 end)
 
@@ -343,24 +343,24 @@ sampRegisterChatCommand("db", function(arg)
 	nick = sampGetPlayerNickname(arg)
     local id = string.match(arg, "(.+)")
 	if id == nil then
-		sampAddChatMessage('{7FFF00}[RozovHelper]{ffffff} Введите ID!', -1)
+		sampAddChatMessage('{7FFF00}[RozovHelper]{ffffff} Р’РІРµРґРёС‚Рµ ID!', -1)
 	else
 		sampSendChat(string.format("/jail %d 120 DriveBy", id))
-		sampAddChatMessage(string.format('{7FFF00}[RozovHelper]{ffffff} Вы успешно посадили %s[%d]. Причина: DriveBy', nick, id),-1)
+		sampAddChatMessage(string.format('{7FFF00}[RozovHelper]{ffffff} Р’С‹ СѓСЃРїРµС€РЅРѕ РїРѕСЃР°РґРёР»Рё %s[%d]. РџСЂРёС‡РёРЅР°: DriveBy', nick, id),-1)
 	end
 end)
 
--- Вы были телепортированы в админ-зону №2 (Arizona Interior №2)
+-- Р’С‹ Р±С‹Р»Рё С‚РµР»РµРїРѕСЂС‚РёСЂРѕРІР°РЅС‹ РІ Р°РґРјРёРЅ-Р·РѕРЅСѓ в„–2 (Arizona Interior в„–2)
 
 sampRegisterChatCommand("az", function(arg)
     local id = string.match(arg, "(.+)")
 	nick = sampGetPlayerNickname(arg)
 	if id == nil then
 		sampSendChat(string.format("/az"))
-		sampAddChatMessage('{7FFF00}[Rozov Тилипёрт]{ffffff} Вы были телепортированы в админ-зону №2 (Arizona Interior №2)!', -1)
+		sampAddChatMessage('{7FFF00}[Rozov РўРёР»РёРїС‘СЂС‚]{ffffff} Р’С‹ Р±С‹Р»Рё С‚РµР»РµРїРѕСЂС‚РёСЂРѕРІР°РЅС‹ РІ Р°РґРјРёРЅ-Р·РѕРЅСѓ в„–2 (Arizona Interior в„–2)!', -1)
 	else
 		sampSendChat(string.format("/az %d", id))
-		sampAddChatMessage(string.format('{7FFF00}[Rozov Тилипёрт]{ffffff} Вы телепортировали %s[%d] в админ-зону №2 (Arizona Interior №2)', nick, id),-1)
+		sampAddChatMessage(string.format('{7FFF00}[Rozov РўРёР»РёРїС‘СЂС‚]{ffffff} Р’С‹ С‚РµР»РµРїРѕСЂС‚РёСЂРѕРІР°Р»Рё %s[%d] РІ Р°РґРјРёРЅ-Р·РѕРЅСѓ в„–2 (Arizona Interior в„–2)', nick, id),-1)
 	end
 end)
 
@@ -368,30 +368,30 @@ sampRegisterChatCommand("bot", function(arg)
     local id = string.match(arg, "(.+)")
 	nick = sampGetPlayerNickname(arg)
 	if id == nil then
-		sampAddChatMessage('{7FFF00}[RozovHelper]{ffffff} Введите ID!', -1)
+		sampAddChatMessage('{7FFF00}[RozovHelper]{ffffff} Р’РІРµРґРёС‚Рµ ID!', -1)
 	else
-		sampSendChat(string.format("/ban %d 30 Бот.", id))
-		sampAddChatMessage(string.format('{7FFF00}[RozovHelper]{ffffff} Вы успешно забанили %s[%d]. Причина: Бот.', nick, id),-1)
+		sampSendChat(string.format("/ban %d 30 Р‘РѕС‚.", id))
+		sampAddChatMessage(string.format('{7FFF00}[RozovHelper]{ffffff} Р’С‹ СѓСЃРїРµС€РЅРѕ Р·Р°Р±Р°РЅРёР»Рё %s[%d]. РџСЂРёС‡РёРЅР°: Р‘РѕС‚.', nick, id),-1)
 	end
 end)
 
 sampRegisterChatCommand("dildo", function(arg)
     local radius, kolvo = string.match(arg, "(.+) (.+)")
 	if radius == nil then
-		sampAddChatMessage('{7FFF00}[RozovHelper]{ffffff} Введите радиус и количество патронов!', -1)
+		sampAddChatMessage('{7FFF00}[RozovHelper]{ffffff} Р’РІРµРґРёС‚Рµ СЂР°РґРёСѓСЃ Рё РєРѕР»РёС‡РµСЃС‚РІРѕ РїР°С‚СЂРѕРЅРѕРІ!', -1)
 	else
 		sampSendChat(string.format("/gunall %d 10 %d", radius, kolvo))
-		sampAddChatMessage(string.format('{7FFF00}[RozovHelper]{ffffff} Вы успешно выдали Purple Dildo [10] в радиусе %d в количестве %d патронов.', radius, kolvo),-1)
+		sampAddChatMessage(string.format('{7FFF00}[RozovHelper]{ffffff} Р’С‹ СѓСЃРїРµС€РЅРѕ РІС‹РґР°Р»Рё Purple Dildo [10] РІ СЂР°РґРёСѓСЃРµ %d РІ РєРѕР»РёС‡РµСЃС‚РІРµ %d РїР°С‚СЂРѕРЅРѕРІ.', radius, kolvo),-1)
 	end
 end)
 
 sampRegisterChatCommand("m4", function(arg)
     local radius, kolvo = string.match(arg, "(.+) (.+)")
 	if radius == nil then
-		sampAddChatMessage('{7FFF00}[RozovHelper]{ffffff} Введите радиус и количество патронов!', -1)
+		sampAddChatMessage('{7FFF00}[RozovHelper]{ffffff} Р’РІРµРґРёС‚Рµ СЂР°РґРёСѓСЃ Рё РєРѕР»РёС‡РµСЃС‚РІРѕ РїР°С‚СЂРѕРЅРѕРІ!', -1)
 	else
 		sampSendChat(string.format("/gunall %d 31 %d", radius, kolvo))
-		sampAddChatMessage(string.format('{7FFF00}[RozovHelper]{ffffff} Вы успешно выдали M4 [31] в радиусе %d в количестве %d патронов.', radius, kolvo),-1)
+		sampAddChatMessage(string.format('{7FFF00}[RozovHelper]{ffffff} Р’С‹ СѓСЃРїРµС€РЅРѕ РІС‹РґР°Р»Рё M4 [31] РІ СЂР°РґРёСѓСЃРµ %d РІ РєРѕР»РёС‡РµСЃС‚РІРµ %d РїР°С‚СЂРѕРЅРѕРІ.', radius, kolvo),-1)
 	end
 end)
 
@@ -401,13 +401,13 @@ function cmd_lvpd(param)
 	nick = sampGetPlayerNickname(arg)
         if id == nil then
             sampSendChat(string.format("/gotoint 18"))
-			sampAddChatMessage('{7FFF00}[Rozov Тилипёрт]{ffffff} Вы были телепортированы в интерьер №18 (Las Venturas Police Department)!', -1)
+			sampAddChatMessage('{7FFF00}[Rozov РўРёР»РёРїС‘СЂС‚]{ffffff} Р’С‹ Р±С‹Р»Рё С‚РµР»РµРїРѕСЂС‚РёСЂРѕРІР°РЅС‹ РІ РёРЅС‚РµСЂСЊРµСЂ в„–18 (Las Venturas Police Department)!', -1)
         else
             lua_thread.create(function()
 				sampSendChat('/gotoint 18')
 				wait(500)
 				sampSendChat(string.format("/gethere %d", id))
-				sampAddChatMessage(string.format('{7FFF00}[Rozov Тилипёрт]{ffffff} Вы телепортировали %s[%d] в интерьер №18 (Las Venturas Police Department)', nick, id),-1)
+				sampAddChatMessage(string.format('{7FFF00}[Rozov РўРёР»РёРїС‘СЂС‚]{ffffff} Р’С‹ С‚РµР»РµРїРѕСЂС‚РёСЂРѕРІР°Р»Рё %s[%d] РІ РёРЅС‚РµСЂСЊРµСЂ в„–18 (Las Venturas Police Department)', nick, id),-1)
             end)
         end
 end
@@ -416,14 +416,14 @@ function cmd_cmd1(param)
     local id = string.match(param, "(%d+)")
 	name = sampGetPlayerNickname(param)
         if id == nil then
-            sampAddChatMessage('{7FFF00}[RozovHelper]{ffffff} Введите ID!', -1)
+            sampAddChatMessage('{7FFF00}[RozovHelper]{ffffff} Р’РІРµРґРёС‚Рµ ID!', -1)
         else
             lua_thread.create(function()
 				sampSendChat(string.format('/spplayer %d', id))
 				wait(500)
 				sampSendChat(string.format("/gethere %d", id))
 				wait(500)
-				sampAddChatMessage(string.format('{7FFF00}[Rozov Тилипёрт]{ffffff} Вы успешно разбагали %s[%d]', name, id),-1)
+				sampAddChatMessage(string.format('{7FFF00}[Rozov РўРёР»РёРїС‘СЂС‚]{ffffff} Р’С‹ СѓСЃРїРµС€РЅРѕ СЂР°Р·Р±Р°РіР°Р»Рё %s[%d]', name, id),-1)
             end)
         end
 end
@@ -431,7 +431,7 @@ end
 function cmd_mp(param)
     local radius = string.match(param, "(%d+)")
         if radius == nil then
-            sampAddChatMessage('{7FFF00}[RozovHelper]{ffffff} Введите радиус выдачи оружия!', -1)
+            sampAddChatMessage('{7FFF00}[RozovHelper]{ffffff} Р’РІРµРґРёС‚Рµ СЂР°РґРёСѓСЃ РІС‹РґР°С‡Рё РѕСЂСѓР¶РёСЏ!', -1)
         else
             lua_thread.create(function()
 				sampSendChat(string.format('/gunall %d 24 500', radius))
@@ -446,7 +446,7 @@ function cmd_mp(param)
 				wait(500)
 				sampSendChat(string.format("/armourall %d", radius))
 				wait(500)
-				sampAddChatMessage(string.format('{7FFF00}[Rozov Ганы]{ffffff} Вы успешно выдали пак оружий "МП"', id),-1)
+				sampAddChatMessage(string.format('{7FFF00}[Rozov Р“Р°РЅС‹]{ffffff} Р’С‹ СѓСЃРїРµС€РЅРѕ РІС‹РґР°Р»Рё РїР°Рє РѕСЂСѓР¶РёР№ "РњРџ"', id),-1)
             end)
         end
 end
